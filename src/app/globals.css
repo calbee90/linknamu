@@ -3,17 +3,40 @@
 @tailwind utilities;
 
 :root {
-  --background: #f9fafb;
-  --foreground: #111827;
+  --bg-from: #fdf8f0;
+  --bg-to: #fbe2cf;
+  --foreground: #3b2f28;
+  --muted: #8c7567;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #f3f4f6;
+  --bg-from: #1d1815;
+  --bg-to: #2b1f19;
+  --foreground: #f6ede5;
+  --muted: #b5a193;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
-  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  background: var(--bg-from);
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Malgun Gothic", "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* background-attachment: fixed는 iOS에서 동작하지 않아 고정 레이어로 그라데이션을 깔아 둠 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgb(255 255 255 / 0.55), transparent 70%),
+    linear-gradient(165deg, var(--bg-from) 0%, var(--bg-to) 100%);
+}
+
+.dark body::before {
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgb(255 190 150 / 0.08), transparent 70%),
+    linear-gradient(165deg, var(--bg-from) 0%, var(--bg-to) 100%);
 }
